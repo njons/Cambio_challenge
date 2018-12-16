@@ -7,7 +7,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: palegoldenrod;
 }
 
 section {
@@ -33,22 +33,24 @@ input {
   font-family: 'Montserrat', sans-serif;
   border: none;
   margin: 5px 0;
-  border-bottom: solid 3px darkblue;
+  border-bottom: solid 3px darkkhaki;
   outline: none;
+  background-color: transparent;
+  color: darkblue;
 }
 
 input:focus {
   border-bottom: solid 3px darkblue;
-
-  background-color: #ddded7;
-  /* border: 1px solid #0011ff; */
+  color: darkblue;
+  background-color: darkkhaki;
 }
+
 input::selection {
   background: #f7a494;
 }
 
 input::placeholder {
-  color: darkblue;
+  color: darkkhaki;
 }
 
 span {
@@ -60,15 +62,18 @@ span {
   font-weight: 700;
 }
 
+.assessment {
+  display: flex;
+}
+
 .result {
   display: flex;
   flex-direction: column;
   height: 100%;
   visibility: hidden;
+  margin: auto;
 }
 
-#result__text,
-#result__value,
 h1,
 h2 {
   margin: auto;
@@ -78,15 +83,19 @@ h2 {
   font-size: 1rem;
   overflow-wrap: break-word;
   font-weight: 700;
-  background-color: lightgrey;
+  background-color: darkblue;
   text-transform: uppercase;
-  color: darkblue;
+  color: white;
   padding: 10px;
 }
 #result__value,
 h2 {
   font-weight: 700;
   text-transform: uppercase;
+}
+#result__text,
+#result__value {
+  margin: 15px auto;
 }
 
 h2 {
