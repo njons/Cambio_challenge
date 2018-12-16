@@ -48,6 +48,19 @@ const renderQuestionnaire = (json) => {
   });
 };
 
+// dynamically generates a
+window.addEventListener('keyup', (event) => {
+  const url = '/api/execute';
+  const method = 'POST';
+
+  xhrRequest('POST', url, (err, bmiData) => {
+    if (err) {
+      new Error();
+    }
+    console.log('this is the calculated bmiData:', bmiData);
+  });
+});
+
 // API call: requesting the questionnaire
 const xhrRequest = (method, url, cb) => {
   const xhr = new XMLHttpRequest(url, cb);
