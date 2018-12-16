@@ -77,27 +77,32 @@ window.addEventListener('keyup', (event) => {
   const url = '/api/execute';
   const method = 'POST';
 
-  const questionnaireResponse = {
-    questionnaireResponse: {
-      resourceType: 'QuestionnaireResponse',
-      questionnaire: {
-        id: 'bmi'
-      },
-      item: [
-        {
-          linkId: 'heightWeight',
-          type: 'group',
-          item: createItemArr()
-        }
-      ]
-    }
-  };
-
-  xhrRequestData(method, url, questionnaireResponse, (err, bmiData) => {
-    if (err) {
+  xhrRequest(method, url, (error, json) => {
+    if (error) {
       new Error();
     }
-    console.log('this is the calculated bmiData:', bmiData);
+    const questionnaireResponse = {
+      questionnaireResponse: {
+        resourceType: 'QuestionnaireResponse',
+        questionnaire: {
+          id: `${json.questionnaire.id}`
+        },
+        item: [
+          {
+            linkId: `${json.questionnaire.item[0].linkId}`,
+            type: `${json.questionnaire.item[0].typ}`,
+            item: createItemArr()
+          }
+        ]
+      }
+    };
+
+    xhrRequestData(method, url, questionnaireResponse, (err, bmiData) => {
+      if (err) {
+        new Error();
+      }
+      console.log('this is the calculated bmiData:', bmiData);
+    });
   });
 });
 
