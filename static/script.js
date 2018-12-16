@@ -120,6 +120,7 @@ window.addEventListener('keyup', (event) => {
         textDiv.textContent = bmiData.assessment.interpretation.text;
         textDiv.style.color = 'white';
         textDiv.style.backgroundColor = 'darkblue';
+        valueDiv.style.visibility = 'visible';
         valueDiv.innerHTML = `the BMI is <span>${bmiData.assessment.valueQuantity.value}</span> ${
           bmiData.assessment.valueQuantity.unit
         }`;
@@ -128,6 +129,7 @@ window.addEventListener('keyup', (event) => {
         result.appendChild(valueDiv);
       } else if (bmiData.assessment.valueQuantity.value > 81) {
         textDiv.textContent = bmiData.assessment.interpretation.text;
+        valueDiv.style.visibility = 'visible';
         valueDiv.textContent = 'the BMI is above 80';
       } else {
         result.style.visibility = 'visible';

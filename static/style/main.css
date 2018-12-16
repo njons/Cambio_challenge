@@ -92,6 +92,7 @@ h2 {
 h2 {
   font-weight: 700;
   text-transform: uppercase;
+  visibility: visible;
 }
 #result__text,
 #result__value {
