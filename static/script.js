@@ -48,11 +48,46 @@ const renderQuestionnaire = (json) => {
   });
 };
 
-// dynamically generates a
+// dynamically generate the number of items that require input in the
+// questionnaireResponse based on the corresponing items in the questionnaire
+const createItemArr = () => {
+  const inputs = document.querySelectorAll('input');
+  console.log('you have reached createItemArr():');
+  console.log('this is inputs in createItemArr():', inputs);
+};
+
+// dynamically generates a questionnaireResponse based on user input
 window.addEventListener('keyup', (event) => {
   const url = '/api/execute';
   const method = 'POST';
-  const data = {
+  // const data = {
+  //   questionnaireResponse: {
+  //     resourceType: 'QuestionnaireResponse',
+  //     questionnaire: {
+  //       id: 'bmi'
+  //     },
+  //     item: [
+  //       {
+  //         linkId: 'heightWeight',
+  //         type: 'group',
+  //         item: [
+  //           {
+  //             linkId: 'weight',
+  //             text: 'Weight(kg)',
+  //             valueDecimal: '65'
+  //           },
+  //           {
+  //             linkId: 'height',
+  //             text: 'Height (cm)',
+  //             valueDecimal: '170'
+  //           }
+  //         ]
+  //       }
+  //     ]
+  //   }
+  // };
+
+  const questionnaireResponse = {
     questionnaireResponse: {
       resourceType: 'QuestionnaireResponse',
       questionnaire: {
@@ -62,23 +97,13 @@ window.addEventListener('keyup', (event) => {
         {
           linkId: 'heightWeight',
           type: 'group',
-          item: [
-            {
-              linkId: 'weight',
-              text: 'Weight(kg)',
-              valueDecimal: '65'
-            },
-            {
-              linkId: 'height',
-              text: 'Height (cm)',
-              valueDecimal: '170'
-            }
-          ]
+          item: createItemArr()
         }
       ]
     }
   };
-  xhrRequestData(method, url, data, (err, bmiData) => {
+
+  xhrRequestData(method, url, questionnaireResponse, (err, bmiData) => {
     if (err) {
       new Error();
     }
