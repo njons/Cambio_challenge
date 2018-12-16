@@ -11,30 +11,22 @@ window.addEventListener('load', (event) => {
   });
 });
 
+// use the questionnaire data to create lable and input elements
+const createElement = (data, element) => {
+  console.log('this is data in createElement()', data);
+  console.log('this is element', element);
+};
+
 // render the questionnaire from the json
 const renderQuestionnaire = (json) => {
   const questionnaireForm = document.querySelector('#questionnaireForm');
   const inputsData = json.questionnaire.item[0].item;
 
-  // iterate through the info requested in the json
   inputsData.forEach((inputData) => {
-    console.log(inputData);
-    // make an input for each questionnaire item
-    const input = document.createElement('input');
-    input.id = inputData.linkId;
-    console.log('this is the id:', inputData.linkId);
-    input.dataset.text = inputData.text;
-    input.placeholder = `add ${inputData.linkId} here`;
-    input.name = inputData.linkId;
-    input.value = '';
-    input.type = 'text';
-    input.autocomplete = 'off';
-    // append to form
-    questionnaireForm.appendChild(input);
-    // make a label for each questionnaire item
-    const label = document.createElement('label');
-    label.for = inputData.linkId;
-    label.textContent = inputData.text;
+    // create a label and input for each item
+    const label = createElement(inputData, 'label');
+    const input = createElement(inputData, 'input');
+    questionnaireForm.appendChild(label);
     questionnaireForm.appendChild(input);
   });
 };
