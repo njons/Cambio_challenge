@@ -31,6 +31,11 @@ const renderQuestionnaire = (json) => {
     input.autocomplete = 'off';
     // append to form
     questionnaireForm.appendChild(input);
+    // make a label for each questionnaire item
+    const label = document.createElement('label');
+    label.for = inputData.linkId;
+    label.textContent = inputData.text;
+    questionnaireForm.appendChild(input);
   });
 };
 
