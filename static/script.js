@@ -111,7 +111,7 @@ window.addEventListener('keyup', (event) => {
       const valueDiv = document.querySelector('#result__value');
       const resultsH2 = document.querySelector('#result__header');
       if (bmiData.assessment.valueQuantity.value > 0 && bmiData.assessment.valueQuantity.value <= 80) {
-        // resultsH2.style.visibility = 'visible';
+        result.style.visibility = 'visible';
         textDiv.textContent = bmiData.assessment.interpretation.text;
         valueDiv.innerHTML = `the BMI is <span>${bmiData.assessment.valueQuantity.value}</span> ${
           bmiData.assessment.valueQuantity.unit
