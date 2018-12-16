@@ -11,7 +11,7 @@ server.use(bodyParser.json());
 
 server.post('/api/execute', (request, response) => {
   const inputValidator = getInputValidator();
-  const valid = inputValidator(request.body);
+  const valid = inputValidator(JSON.stringify(request.body));
   if (!valid) {
     response.status(400).json(inputValidator.errors);
     return;
