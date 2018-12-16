@@ -20,32 +20,32 @@ server.post('/api/execute', (request, response) => {
   const responseBody = {};
 
   responseBody.questionnaire = getQuestionnaire();
-  request.body = {
-    questionnaireResponse: {
-      resourceType: 'QuestionnaireResponse',
-      questionnaire: {
-        id: 'bmi'
-      },
-      item: [
-        {
-          linkId: 'heightWeight',
-          type: 'group',
-          item: [
-            {
-              linkId: 'weight',
-              text: 'Weight(kg)',
-              valueDecimal: '65'
-            },
-            {
-              linkId: 'height',
-              text: 'Height (cm)',
-              valueDecimal: '170'
-            }
-          ]
-        }
-      ]
-    }
-  };
+  // request.body = {
+  //   questionnaireResponse: {
+  //     resourceType: 'QuestionnaireResponse',
+  //     questionnaire: {
+  //       id: 'bmi'
+  //     },
+  //     item: [
+  //       {
+  //         linkId: 'heightWeight',
+  //         type: 'group',
+  //         item: [
+  //           {
+  //             linkId: 'weight',
+  //             text: 'Weight(kg)',
+  //             valueDecimal: '65'
+  //           },
+  //           {
+  //             linkId: 'height',
+  //             text: 'Height (cm)',
+  //             valueDecimal: '170'
+  //           }
+  //         ]
+  //       }
+  //     ]
+  //   }
+  // };
 
   console.log('this is request.body:', request.body);
   const questionnaireResponse = request.body.questionnaireResponse;

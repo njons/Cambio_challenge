@@ -52,14 +52,60 @@ const renderQuestionnaire = (json) => {
 window.addEventListener('keyup', (event) => {
   const url = '/api/execute';
   const method = 'POST';
-
-  xhrRequest('POST', url, (err, bmiData) => {
+  const data = {
+    questionnaireResponse: {
+      resourceType: 'QuestionnaireResponse',
+      questionnaire: {
+        id: 'bmi'
+      },
+      item: [
+        {
+          linkId: 'heightWeight',
+          type: 'group',
+          item: [
+            {
+              linkId: 'weight',
+              text: 'Weight(kg)',
+              valueDecimal: '65'
+            },
+            {
+              linkId: 'height',
+              text: 'Height (cm)',
+              valueDecimal: '170'
+            }
+          ]
+        }
+      ]
+    }
+  };
+  xhrRequestData(method, url, data, (err, bmiData) => {
     if (err) {
       new Error();
     }
     console.log('this is the calculated bmiData:', bmiData);
   });
 });
+
+// API call: posting the data to the endoint
+const xhrRequestData = (method, url, data, cb) => {
+  console.log('you are requesting data');
+  console.log('this is the url in the request:', url);
+  console.log('this is the obj in the request:', data);
+  // const data = JSON.stringify(obj);
+  // console.log('this is the json data in the request:', data);
+  const xhr = new XMLHttpRequest(url, cb);
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      return cb(null, JSON.parse(xhr.responseText));
+    } else if (xhr.readyState === 4 && xhr.status != 200) {
+      return 'sorry something went wrong';
+    }
+  };
+  xhr.open(method, url, true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.send(JSON.stringify(data));
+};
 
 // API call: requesting the questionnaire
 const xhrRequest = (method, url, cb) => {
