@@ -115,6 +115,9 @@ window.addEventListener('keyup', (event) => {
 
         result.appendChild(textDiv);
         result.appendChild(valueDiv);
+      } else if (bmiData.assessment.valueQuantity.value > 81) {
+        textDiv.textContent = bmiData.assessment.interpretation.text;
+        valueDiv.textContent = 'the BMI is above 80';
       }
     });
   });
