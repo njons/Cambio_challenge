@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "ajv": "^6.6.1",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "eslint": "^5.9.0",
+    "eslint-config-strict": "^14.0.1",
+    "eslint-plugin-html": "^5.0.0"
+  },
+  "main": "server.js"
+}
