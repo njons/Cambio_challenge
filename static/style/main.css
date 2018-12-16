@@ -46,7 +46,7 @@ input:focus {
 }
 
 input::selection {
-  background: #f7a494;
+  background: white;
 }
 
 input::placeholder {
