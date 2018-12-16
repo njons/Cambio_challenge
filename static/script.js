@@ -43,8 +43,8 @@ const renderQuestionnaire = (json) => {
     // create a label and input for each item
     const label = createElement(inputData, 'label');
     const input = createElement(inputData, 'input');
-    // questionnaireForm.appendChild(label);
-    // questionnaireForm.appendChild(input);
+    questionnaireForm.appendChild(label);
+    questionnaireForm.appendChild(input);
   });
 };
 
