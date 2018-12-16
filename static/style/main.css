@@ -56,7 +56,7 @@ input::placeholder {
 span {
   color: darkblue;
 }
-
+.assessment,
 .questionnaire {
   text-transform: uppercase;
   font-weight: 700;

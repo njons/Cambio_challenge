@@ -62,6 +62,10 @@ const createItemArr = () => {
   let item = {};
   inputs.forEach((input, i) => {
     const inputValue = input.value;
+
+    if (inputValue === '') {
+      console.log();
+    }
     console.log('this is the input value:', inputValue);
     console.log('this is the input:', input);
     console.log('this is i', i);
@@ -110,10 +114,12 @@ window.addEventListener('keyup', (event) => {
       const textDiv = document.querySelector('#result__text');
       const valueDiv = document.querySelector('#result__value');
       // const resultsH2 = document.querySelector('#result__header');
-      if (typeof bmiData.assessment.valueQuantity.value !== 'number') {
-      } else if (bmiData.assessment.valueQuantity.value > 0 && bmiData.assessment.valueQuantity.value <= 80) {
+      console.log('this is bmiData when inputting letters', bmiData.assessment.valueQuantity.value);
+      if (typeof bmiData.assessment.valueQuantity.value === 'number' && bmiData.assessment.valueQuantity.value <= 80) {
         result.style.visibility = 'visible';
         textDiv.textContent = bmiData.assessment.interpretation.text;
+        textDiv.style.color = 'white';
+        textDiv.style.backgroundColor = 'darkblue';
         valueDiv.innerHTML = `the BMI is <span>${bmiData.assessment.valueQuantity.value}</span> ${
           bmiData.assessment.valueQuantity.unit
         }`;
@@ -123,6 +129,12 @@ window.addEventListener('keyup', (event) => {
       } else if (bmiData.assessment.valueQuantity.value > 81) {
         textDiv.textContent = bmiData.assessment.interpretation.text;
         valueDiv.textContent = 'the BMI is above 80';
+      } else {
+        result.style.visibility = 'visible';
+        textDiv.textContent = 'try adding numbers';
+        textDiv.style.color = 'tomato';
+        textDiv.style.backgroundColor = 'transparent';
+        valueDiv.style.visibility = 'hidden';
       }
     });
   });
