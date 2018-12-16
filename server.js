@@ -120,6 +120,8 @@ function getObservationFromQuestionnaireResponse(questionnaireResponse) {
   const heightWeight = questionnaireResponse.item.find((item) => item.linkId === 'heightWeight');
   const height = heightWeight.item.find((item) => item.linkId === 'height');
   const weight = heightWeight.item.find((item) => item.linkId === 'weight');
+  console.log('this is height:', height);
+  console.log('this is weight:', weight);
   const bmi = Math.round((weight.valueDecimal / Math.pow(height.valueDecimal / 100, 2)) * 100) / 100;
 
   return {
