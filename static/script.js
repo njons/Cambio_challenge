@@ -37,7 +37,11 @@ const createElement = (data, element) => {
 // render the questionnaire from the json
 const renderQuestionnaire = (json) => {
   const questionnaireForm = document.querySelector('#questionnaireForm');
+  const questionnaireName = document.querySelector('#questionnaireName');
   const inputsData = json.questionnaire.item[0].item;
+
+  // set the name of the questionnare
+  questionnaireName.textContent = `${json.questionnaire.id} ${json.questionnaire.resourceType}`;
 
   inputsData.forEach((inputData) => {
     // create a label and input for each item
