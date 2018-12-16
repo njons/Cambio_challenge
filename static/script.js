@@ -102,6 +102,20 @@ window.addEventListener('keyup', (event) => {
         new Error();
       }
       console.log('this is the calculated bmiData:', bmiData);
+      const result = document.querySelector('.result');
+      const textDiv = document.querySelector('#result__text');
+      const valueDiv = document.querySelector('#result__value');
+      const resultsH2 = document.querySelector('#result__header');
+      if (bmiData.assessment.valueQuantity.value > 0 && bmiData.assessment.valueQuantity.value <= 80) {
+        resultsH2.style.visibility = 'visible';
+        textDiv.textContent = bmiData.assessment.interpretation.text;
+        valueDiv.innerHTML = `the BMI is <span>${bmiData.assessment.valueQuantity.value}</span> ${
+          bmiData.assessment.valueQuantity.unit
+        }`;
+
+        result.appendChild(textDiv);
+        result.appendChild(valueDiv);
+      }
     });
   });
 });
