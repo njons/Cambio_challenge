@@ -16,12 +16,15 @@ const renderQuestionnaire = (json) => {
   const questionnaireForm = document.querySelector('#questionnaireForm');
   const inputsData = json.questionnaire.item[0].item;
 
-  // run through the info requested in the json
+  // iterate through the info requested in the json
   inputsData.forEach((inputData) => {
     console.log(inputData);
-    // grab the text in each of the data items
-    // make a label and input for each questionnaire item
+    // make an input for each questionnaire item
+    const input = document.createElement('input');
+    input.id = inputData.linkId;
+    console.log('this is the id:', inputData.linkId);
     // append to form
+    questionnaireForm.appendChild(input);
   });
 };
 
