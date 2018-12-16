@@ -7,9 +7,23 @@ window.addEventListener('load', (event) => {
     if (error) {
       new Error();
     }
-    console.log('this is json:', json);
+    renderQuestionnaire(json);
   });
 });
+
+// render the questionnaire from the json
+const renderQuestionnaire = (json) => {
+  const questionnaireForm = document.querySelector('#questionnaireForm');
+  const inputsData = json.questionnaire.item[0].item;
+
+  // run through the info requested in the json
+  inputsData.forEach((inputData) => {
+    console.log(inputData);
+    // grab the text in each of the data items
+    // make a label and input for each questionnaire item
+    // append to form
+  });
+};
 
 // API call: requesting the questionnaire
 const xhrRequest = (method, url, cb) => {
