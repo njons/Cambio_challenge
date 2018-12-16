@@ -23,6 +23,12 @@ const renderQuestionnaire = (json) => {
     const input = document.createElement('input');
     input.id = inputData.linkId;
     console.log('this is the id:', inputData.linkId);
+    input.dataset.text = inputData.text;
+    input.placeholder = `add ${inputData.linkId} here`;
+    input.name = inputData.linkId;
+    input.value = '';
+    input.type = 'text';
+    input.autocomplete = 'off';
     // append to form
     questionnaireForm.appendChild(input);
   });
