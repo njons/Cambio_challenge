@@ -14,10 +14,7 @@ section {
   display: flex;
   flex-direction: column;
   height: 50%;
-}
-
-h1 {
-  margin: auto;
+  padding: 2%;
 }
 
 form {
@@ -25,15 +22,13 @@ form {
   flex-direction: column;
   margin: auto;
   max-width: 90%;
-  padding: 10px;
 }
 
 label {
-  margin: 20px 0;
+  margin: 10px 0;
 }
 
 input {
-  padding: 0 5px;
   font-size: 2rem;
   font-family: 'Montserrat', sans-serif;
   border: none;
@@ -73,14 +68,19 @@ span {
 
 #result__text,
 #result__value,
+h1,
 h2 {
   margin: auto;
 }
 
 #result__text {
-  font-size: 2rem;
-  background-color: rgba(‎75, 0, 130, 0.5);
-  border-bottom: solid 3px indigo;
+  font-size: 1rem;
+  overflow-wrap: break-word;
+  font-weight: 700;
+  background-color: lightgrey;
+  text-transform: uppercase;
+  color: darkblue;
+  padding: 10px;
 }
 #result__value,
 h2 {
@@ -90,4 +90,10 @@ h2 {
 
 h2 {
   visibility: hidden;
+}
+
+@media (max-width: 320px) {
+  #result__text {
+    font-size: 1rem;
+  }
 }
