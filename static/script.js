@@ -54,38 +54,28 @@ const createItemArr = () => {
   const inputs = document.querySelectorAll('input');
   console.log('you have reached createItemArr():');
   console.log('this is inputs in createItemArr():', inputs);
+  const responseArr = [];
+  let item = {};
+  inputs.forEach((input, i) => {
+    const inputValue = input.value;
+    console.log('this is the input value:', inputValue);
+    console.log('this is the input:', input);
+    console.log('this is i', i);
+
+    item = {
+      linkId: input.id,
+      text: input.dataset.text,
+      valueDecimal: input.value
+    };
+    responseArr.push(item);
+  });
+  return responseArr;
 };
 
 // dynamically generates a questionnaireResponse based on user input
 window.addEventListener('keyup', (event) => {
   const url = '/api/execute';
   const method = 'POST';
-  // const data = {
-  //   questionnaireResponse: {
-  //     resourceType: 'QuestionnaireResponse',
-  //     questionnaire: {
-  //       id: 'bmi'
-  //     },
-  //     item: [
-  //       {
-  //         linkId: 'heightWeight',
-  //         type: 'group',
-  //         item: [
-  //           {
-  //             linkId: 'weight',
-  //             text: 'Weight(kg)',
-  //             valueDecimal: '65'
-  //           },
-  //           {
-  //             linkId: 'height',
-  //             text: 'Height (cm)',
-  //             valueDecimal: '170'
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   }
-  // };
 
   const questionnaireResponse = {
     questionnaireResponse: {
