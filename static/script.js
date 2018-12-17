@@ -1,8 +1,5 @@
-console.log('this is script.js');
-
 // get the questionnaire json on load
 window.addEventListener('load', (event) => {
-  console.log('I loaded');
   xhrRequest('POST', '/api/execute', (error, json) => {
     if (error) {
       new Error();
@@ -13,8 +10,6 @@ window.addEventListener('load', (event) => {
 
 // use the questionnaire data to create lable and input elements
 const createElement = (data, element) => {
-  console.log('this is data in createElement()', data);
-  console.log('this is element', element);
   if (element === 'label') {
     const label = document.createElement('label');
     label.for = data.linkId;
@@ -41,7 +36,7 @@ const renderQuestionnaire = (json) => {
   const inputsData = json.questionnaire.item[0].item;
 
   // set the name of the questionnare
-  questionnaireName.textContent = `Calculate ${json.questionnaire.id}`;
+  questionnaireName.textContent = `Assess ${json.questionnaire.id}`;
 
   inputsData.forEach((inputData) => {
     // create a label and input for each item
@@ -56,20 +51,17 @@ const renderQuestionnaire = (json) => {
 // questionnaireResponse based on the corresponing items in the questionnaire
 const createItemArr = () => {
   const inputs = document.querySelectorAll('input');
-  console.log('you have reached createItemArr():');
-  console.log('this is inputs in createItemArr():', inputs);
   const responseArr = [];
   let item = {};
-  inputs.forEach((input, i) => {
+
+  // iterate through the inputs and use the information in the attributes to
+  // populate the questionnaireResponse with the relevant info
+  inputs.forEach((input) => {
     const inputValue = input.value;
-
     if (inputValue === '') {
-      console.log();
+      console.log('empty input');
     }
-    console.log('this is the input value:', inputValue);
-    console.log('this is the input:', input);
-    console.log('this is i', i);
-
+    // dynamically generate items for each of the questions in the questionnaire
     item = {
       linkId: input.id,
       text: input.dataset.text,
@@ -85,6 +77,8 @@ window.addEventListener('keyup', (event) => {
   const url = '/api/execute';
   const method = 'POST';
 
+  // get the questionnare object to be able to dynamically add in the information
+  // to all of the questionnaireResponse
   xhrRequest(method, url, (error, json) => {
     if (error) {
       new Error();
@@ -99,22 +93,23 @@ window.addEventListener('keyup', (event) => {
           {
             linkId: `${json.questionnaire.item[0].linkId}`,
             type: `${json.questionnaire.item[0].typ}`,
+            // dynamically generate the number of items specified in the questionnaire
             item: createItemArr()
           }
         ]
       }
     };
 
+    // post the response data to the endpoint to do the bmi calculation
     xhrRequestData(method, url, questionnaireResponse, (err, bmiData) => {
       if (err) {
         new Error();
       }
-      console.log('this is the calculated bmiData:', bmiData);
+      // manipulate the dom upon recepit of the calculated data
       const result = document.querySelector('.result');
       const textDiv = document.querySelector('#result__text');
       const valueDiv = document.querySelector('#result__value');
-      // const resultsH2 = document.querySelector('#result__header');
-      console.log('this is bmiData when inputting letters', bmiData.assessment.valueQuantity.value);
+      // if the resulting calculation is a number and the BMI is lower than 80
       if (typeof bmiData.assessment.valueQuantity.value === 'number' && bmiData.assessment.valueQuantity.value <= 80) {
         result.style.visibility = 'visible';
         textDiv.textContent = bmiData.assessment.interpretation.text;
@@ -124,13 +119,14 @@ window.addEventListener('keyup', (event) => {
         valueDiv.innerHTML = `the BMI is <span>${bmiData.assessment.valueQuantity.value}</span> ${
           bmiData.assessment.valueQuantity.unit
         }`;
-
         result.appendChild(textDiv);
         result.appendChild(valueDiv);
+        // if the resulting calculation is over 80
       } else if (bmiData.assessment.valueQuantity.value > 81) {
         textDiv.textContent = bmiData.assessment.interpretation.text;
         valueDiv.style.visibility = 'visible';
-        valueDiv.textContent = 'the BMI is above 80';
+        valueDiv.textContent = 'the BMI is above 80 kg/m2';
+        // if the resulting calculation is null (empty or non-number input)
       } else {
         result.style.visibility = 'visible';
         textDiv.textContent = 'try adding numbers';
@@ -142,20 +138,14 @@ window.addEventListener('keyup', (event) => {
   });
 });
 
-// API call: posting the data to the endoint
+// API call: posting data to the endoint
 const xhrRequestData = (method, url, data, cb) => {
-  console.log('you are requesting data');
-  console.log('this is the url in the request:', url);
-  console.log('this is the obj in the request:', data);
-  // const data = JSON.stringify(obj);
-  // console.log('this is the json data in the request:', data);
   const xhr = new XMLHttpRequest(url, cb);
-
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
       return cb(null, JSON.parse(xhr.responseText));
     } else if (xhr.readyState === 4 && xhr.status != 200) {
-      return 'sorry something went wrong';
+      console.log('sorry something went wrong');
     }
   };
   xhr.open(method, url, true);
@@ -170,7 +160,7 @@ const xhrRequest = (method, url, cb) => {
     if (xhr.readyState === 4 && xhr.status === 200) {
       return cb(null, JSON.parse(xhr.responseText));
     } else if (xhr.readyState === 4 && xhr.status != 200) {
-      return 'sorry something went wrong';
+      console.log('sorry something went wrong');
     }
   };
   xhr.open(method, url, true);
