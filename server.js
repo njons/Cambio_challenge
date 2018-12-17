@@ -20,34 +20,7 @@ server.post('/api/execute', (request, response) => {
   const responseBody = {};
 
   responseBody.questionnaire = getQuestionnaire();
-  // request.body = {
-  //   questionnaireResponse: {
-  //     resourceType: 'QuestionnaireResponse',
-  //     questionnaire: {
-  //       id: 'bmi'
-  //     },
-  //     item: [
-  //       {
-  //         linkId: 'heightWeight',
-  //         type: 'group',
-  //         item: [
-  //           {
-  //             linkId: 'weight',
-  //             text: 'Weight(kg)',
-  //             valueDecimal: '65'
-  //           },
-  //           {
-  //             linkId: 'height',
-  //             text: 'Height (cm)',
-  //             valueDecimal: '170'
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   }
-  // };
 
-  console.log('this is request.body:', request.body);
   const questionnaireResponse = request.body.questionnaireResponse;
   if (questionnaireResponse) {
     responseBody.assessment = getObservationFromQuestionnaireResponse(questionnaireResponse);
@@ -120,8 +93,6 @@ function getObservationFromQuestionnaireResponse(questionnaireResponse) {
   const heightWeight = questionnaireResponse.item.find((item) => item.linkId === 'heightWeight');
   const height = heightWeight.item.find((item) => item.linkId === 'height');
   const weight = heightWeight.item.find((item) => item.linkId === 'weight');
-  console.log('this is height:', height);
-  console.log('this is weight:', weight);
   const bmi = Math.round((weight.valueDecimal / Math.pow(height.valueDecimal / 100, 2)) * 100) / 100;
 
   return {
