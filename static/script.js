@@ -18,7 +18,6 @@ const createElement = (data, element) => {
   } else if (element === 'input') {
     const input = document.createElement('input');
     input.id = data.linkId;
-    console.log('this is the id:', data.linkId);
     input.dataset.text = data.text;
     input.placeholder = `add ${data.linkId} here`;
     input.name = data.linkId;
@@ -58,9 +57,6 @@ const createItemArr = () => {
   // populate the questionnaireResponse with the relevant info
   inputs.forEach((input) => {
     const inputValue = input.value;
-    if (inputValue === '') {
-      console.log('empty input');
-    }
     // dynamically generate items for each of the questions in the questionnaire
     item = {
       linkId: input.id,
